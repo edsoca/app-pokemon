@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const petition = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com/',
+    baseURL: 'https://pokeapi.co/api/v2/pokemon/',
     withCredentials: false,
     headers: {
         Accept: 'application/json',
@@ -10,11 +10,11 @@ const petition = axios.create({
 })
 
 export default {
-    getPhotos() {
+    getPokemons() {
         //Com a paràmetre de get posem l'última part de l'URL
-        return petition.get('/photos?_limit=10')
+        return petition.get('?limit=10')
     },
-    getSinglePhoto(id){
-        return petition.get(`/photos/${id}`)
+    getSinglePokemon(id){
+        return petition.get(`/${id}`)
     }
 }
