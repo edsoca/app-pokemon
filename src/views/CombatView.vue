@@ -36,8 +36,6 @@ const solveDuel = () => {
       '<h2>VS</h2>'+
       '<img src="'+pok2.sprites.front_default+'">' +
       '<h3>' + winner.value.toUpperCase() + ' wins!</h3>',
-    showCloseButton: true,
-    focusConfirm: false,
     confirmButtonText: 'OK',
     customClass:{
       container: 'secular'
