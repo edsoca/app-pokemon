@@ -1,4 +1,3 @@
-
 <script setup>
 import PokemonCard from '../components/PokemonCard.vue'
 import { onMounted, ref } from 'vue'
@@ -19,11 +18,15 @@ const calculateDuel = (dades, elem) => {
   }
 }
 
+const reload = () => {
+  window.location.reload(true)
+}
 const solveDuel = () => {
   const pok1 = pokeDuel.value.pop()
   const pok2 = pokeDuel.value.pop()
   const winner = ref('Nobody')
 
+  document.getElementById('reload_btn').disabled=false;
   console.log(pok1, pok2)
 
   if (pok1.stats[1].base_stat > pok2.stats[2].base_stat) winner.value = pok1.name
@@ -62,6 +65,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <input type="button" id="reload_btn" value="Nova partida" class="reload-button" @click="reload" disabled>
   <div class="for">
     <br />
     <section class="cards">
@@ -77,6 +81,18 @@ onMounted(() => {
 
 .new {
   display: grid;
+}
+
+#reload_btn{
+  cursor: pointer;
+  font-family: 'Secular One', sans-serif;
+  background-color: orangered;
+}
+
+#reload_btn:disabled{
+  cursor: none;
+  font-family: 'Secular One', sans-serif;
+  background-color: rgb(126, 124, 123);
 }
 
 .secular {

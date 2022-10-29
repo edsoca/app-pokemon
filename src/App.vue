@@ -1,30 +1,43 @@
 <script setup>
-import {ref} from 'vue'
+import { onMounted, ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import Titol from './components/Titol.vue'
 import { computed } from '@vue/reactivity';
 
-let themeValue = 'dark';
+let themeValue = localStorage.getItem('theme') || 'dark'
 
 const changeTheme = e => {
-
-  if(e.target.value == 'system'){
-    themeValue = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+  if (e.target.value == 'system') {
+    themeValue = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
   }
-  else{
+  else {
     themeValue = e.target.value;
   }
-  console.log(themeValue);
   document.body.className = themeValue;
   document.getElementsByClassName('themed')[0].className = 'themed ' + themeValue
+  localStorage.setItem('theme', e.target.value);
 }
+
+onMounted(() => {
+    document.getElementById(themeValue).checked = true
+    if(themeValue == 'system'){
+      themeValue = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'
+    }
+
+    document.body.className = themeValue;
+    document.getElementsByClassName('themed')[0].className = 'themed ' + themeValue
+  })
+
+
 </script>
 
 <template>
   <!-- Per posar una variable com a valor d'un atribut podem posar davant v-bind: o directament : -->
   <main class="themed">
     <header>
-      <img alt="Pokedex logo" class="logo" src="https://cdn.icon-icons.com/icons2/851/PNG/512/Pokedex_tool_icon-icons.com_67529.png" width="125" height="125" />
+      <img alt="Pokedex logo" class="logo"
+        src="https://cdn.icon-icons.com/icons2/851/PNG/512/Pokedex_tool_icon-icons.com_67529.png" width="125"
+        height="125" />
 
       <div class="wrapper">
         <Titol msg="POKEDEX" />
@@ -40,17 +53,17 @@ const changeTheme = e => {
           <label for="dark">Dark</label>
           <input type="radio" name="theme" id="dark" value="dark" @change="changeTheme" checked>
         </span>
-        
+
         <span>
           <label for="light">Light</label>
           <input type="radio" name="theme" id="light" value="light" @change="changeTheme">
         </span>
-        
+
         <span>
           <label for="system">System</label>
           <input type="radio" name="theme" id="system" value="system" @change="changeTheme">
         </span>
-        
+
       </div>
     </header>
 
@@ -59,8 +72,7 @@ const changeTheme = e => {
 </template>
 
 <style scoped>
-
-:root{
+:root {
   --bg-color: #181818;
   --text-color: hsla(160, 100%, 37%, 1);
   --bg-card: hsla(160, 100%, 37%, 1);
@@ -68,7 +80,7 @@ const changeTheme = e => {
   --input-border: #ddd;
 }
 
-.themed.dark{
+.themed.dark {
   --bg-color: #181818;
   --text-color: hsla(160, 100%, 37%, 1);
   --bg-card: hsla(160, 100%, 37%, 1);
@@ -76,7 +88,7 @@ const changeTheme = e => {
   --input-border: #ddd;
 }
 
-.themed.light{
+.themed.light {
   --bg-color: #eee;
   --text-color: #111;
   --bg-card: #ddd;
@@ -84,24 +96,24 @@ const changeTheme = e => {
   --input-border: #222;
 }
 
-.settings{
-  display:flex;
+.settings {
+  display: flex;
   flex-direction: column;
   gap: 1em;
 }
 
-.settings span{
+.settings span {
   display: flex;
 }
 
 header {
   line-height: 1.5;
   max-height: 100vh;
-  display:grid;
+  display: grid;
   grid-template-columns: 130px auto 130px;
 }
 
-.themed{
+.themed {
   background-color: var(--bg-color);
   color: var(--text-color);
   width: 100%;
@@ -149,12 +161,12 @@ nav a:first-of-type {
     margin: 0 2rem 0 0;
   }
 
-  .settings{
-    display:flex;
+  .settings {
+    display: flex;
     flex-direction: row;
   }
 
-  .settings span{
+  .settings span {
     flex-direction: column;
   }
 
