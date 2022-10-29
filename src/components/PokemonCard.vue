@@ -4,6 +4,8 @@ const props = defineProps(['cardInfo', 'shape'])
 
 const duel = ref(0)
 
+const no_image = 'no-image.png'
+
 const flipCard = (e) => {
     const currentCard = e.currentTarget;
     currentCard.parentNode.classList.add('flipped')
@@ -17,8 +19,8 @@ const flipCard = (e) => {
         <div v-if="shape == 'combat'" class="back" @click="$emit('pokemonDuel',props.cardInfo,$event.currentTarget.parentNode)"></div>
         <div :class="shape=='combat'?'front':''">
             <div class="img-container">
-                <img :src="props.cardInfo.sprites.front_default" :alt="props.cardInfo.name">
-                <img v-if="shape == 'complete'" :src="props.cardInfo.sprites.back_default" :alt="props.cardInfo.name">
+                <img :src="props.cardInfo.sprites.front_default || no_image" :alt="props.cardInfo.name">
+                <img v-if="shape == 'complete'" :src="props.cardInfo.sprites.back_default || no_image" :alt="props.cardInfo.name">
             </div>
             <h2>{{ props.cardInfo.name.toUpperCase().substring(0,9) }}</h2>
             <div class="estats">

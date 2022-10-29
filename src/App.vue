@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import Titol from './components/Titol.vue'
 
 const theme = ref('dark')
 
@@ -15,7 +15,7 @@ const changeTheme = e => document.body.className = e.target.value
       <img alt="Pokedex logo" class="logo" src="https://cdn.icon-icons.com/icons2/851/PNG/512/Pokedex_tool_icon-icons.com_67529.png" width="125" height="125" />
 
       <div class="wrapper">
-        <HelloWorld msg="POKEDEX" />
+        <Titol msg="POKEDEX" />
 
         <nav>
           <RouterLink to="/">Home</RouterLink>
