@@ -20,7 +20,7 @@
 
 <template>
   <div class="card">
-    <PokemonCard v-if="data_fetched" :cardInfo="pokemonData" :complete="true"/>
+    <PokemonCard v-if="data_fetched" :cardInfo="pokemonData" shape="complete"/>
   </div>
 </template>
 

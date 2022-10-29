@@ -12,10 +12,10 @@ const changeTheme = e => document.body.className = e.target.value
   <!-- Per posar una variable com a valor d'un atribut podem posar davant v-bind: o directament : -->
   <main class="themed" :class="theme">
     <header>
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+      <img alt="Pokedex logo" class="logo" src="https://cdn.icon-icons.com/icons2/851/PNG/512/Pokedex_tool_icon-icons.com_67529.png" width="125" height="125" />
 
       <div class="wrapper">
-        <HelloWorld msg="You did it!" />
+        <HelloWorld msg="POKEDEX" />
 
         <nav>
           <RouterLink to="/">Home</RouterLink>
@@ -42,6 +42,7 @@ const changeTheme = e => document.body.className = e.target.value
   --text-color: hsla(160, 100%, 37%, 1);
   --bg-card: hsla(160, 100%, 37%, 1);
   --text-card: #222;
+  --input-border: #ddd;
 }
 
 .themed.dark{
@@ -49,6 +50,7 @@ const changeTheme = e => document.body.className = e.target.value
   --text-color: hsla(160, 100%, 37%, 1);
   --bg-card: hsla(160, 100%, 37%, 1);
   --text-card: #222;
+  --input-border: #ddd;
 }
 
 .themed.light{
@@ -56,6 +58,7 @@ const changeTheme = e => document.body.className = e.target.value
   --text-color: #111;
   --bg-card: #ddd;
   --text-card: #333;
+  --input-border: #222;
 }
 
 .settings{
@@ -67,13 +70,16 @@ header {
   line-height: 1.5;
   max-height: 100vh;
   display:flex;
-  align-items: center;
+  justify-content: center;
 }
 
 .themed{
   background-color: var(--bg-color);
   color: var(--text-color);
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 }
 
 .logo {
@@ -83,7 +89,7 @@ header {
 
 nav {
   width: 100%;
-  font-size: 12px;
+  font-size: 1.5em;
   text-align: center;
   margin-top: 2rem;
 }
@@ -99,7 +105,7 @@ nav a.router-link-exact-active:hover {
 nav a {
   display: inline-block;
   padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+  border-left: 1px solid var(--input-border);
 }
 
 nav a:first-of-type {
@@ -110,6 +116,7 @@ nav a:first-of-type {
   header {
     display: flex;
     place-items: center;
+    justify-content: center;
     padding-right: calc(var(--section-gap) / 2);
   }
 
@@ -119,15 +126,14 @@ nav a:first-of-type {
 
   header .wrapper {
     display: flex;
-    place-items: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
   }
 
   nav {
-    text-align: left;
+    text-align: center;
     margin-left: -1rem;
-    font-size: 1rem;
-
+    font-size: 1.5em;
     padding: 1rem 0;
     margin-top: 1rem;
   }
