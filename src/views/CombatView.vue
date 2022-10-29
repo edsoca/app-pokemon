@@ -38,7 +38,10 @@ const solveDuel = () => {
       '<h3>' + winner.value.toUpperCase() + ' wins!</h3>',
     showCloseButton: true,
     focusConfirm: false,
-    confirmButtonText: 'OK'
+    confirmButtonText: 'OK',
+    customClass:{
+      container: 'secular'
+    }
   })
 }
 
@@ -72,10 +75,17 @@ onMounted(() => {
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
 .new {
   display: grid;
 }
 
+.secular {
+  font-size: 2em;
+    font-weight: bolder;
+    font-family: 'Secular One', sans-serif;
+}
 li {
   cursor: pointer;
 }

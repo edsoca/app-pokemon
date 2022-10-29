@@ -49,7 +49,7 @@ const changeTheme = e => document.body.className = e.target.value
   --bg-color: #181818;
   --text-color: hsla(160, 100%, 37%, 1);
   --bg-card: hsla(160, 100%, 37%, 1);
-  --text-card: #222;
+  --text-card: #999;
   --input-border: #ddd;
 }
 

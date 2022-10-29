@@ -46,6 +46,8 @@ const flipCard = (e) => {
 
 <!-- 'scoped' fa que aquesta classe card sols afecti a aquest component -->
 <style scoped>
+@import url('http://fonts.cdnfonts.com/css/pokemon-solid');
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
 .card {
     display: flex;
     flex-direction: column;
@@ -79,14 +81,17 @@ const flipCard = (e) => {
     font-size: 2rem;
     font-weight: 600;
     font-family: 'Pokemon Solid', sans-serif;
-    text-shadow: var(--vora-text);
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+        1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
     white-space: nowrap;
+    color: #222;
 }
 
 .card .estats {
     display: flex;
     justify-content: space-evenly;
     gap: 1em;
+    color: #222;
 }
 
 .card .card-attack,
