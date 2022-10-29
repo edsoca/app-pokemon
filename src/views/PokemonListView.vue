@@ -84,7 +84,7 @@ li:hover {
   justify-content: center;
 }
 
-input {
+input[type=text] {
   font-size: 16px;
   font-size: max(16px, 1em);
   font-family: inherit;

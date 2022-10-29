@@ -2,15 +2,27 @@
 import {ref} from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import Titol from './components/Titol.vue'
+import { computed } from '@vue/reactivity';
 
-const theme = ref('dark')
+let themeValue = 'dark';
 
-const changeTheme = e => document.body.className = e.target.value
+const changeTheme = e => {
+
+  if(e.target.value == 'system'){
+    themeValue = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+  }
+  else{
+    themeValue = e.target.value;
+  }
+  console.log(themeValue);
+  document.body.className = themeValue;
+  document.getElementsByClassName('themed')[0].className = 'themed ' + themeValue
+}
 </script>
 
 <template>
   <!-- Per posar una variable com a valor d'un atribut podem posar davant v-bind: o directament : -->
-  <main class="themed" :class="theme">
+  <main class="themed">
     <header>
       <img alt="Pokedex logo" class="logo" src="https://cdn.icon-icons.com/icons2/851/PNG/512/Pokedex_tool_icon-icons.com_67529.png" width="125" height="125" />
 
@@ -24,10 +36,21 @@ const changeTheme = e => document.body.className = e.target.value
       </div>
 
       <div class="settings">
-        <label for="dark">Dark</label>
-        <input type="radio" name="theme" id="dark" value="dark" @change="changeTheme" v-model="theme" checked>
-        <label for="light">Light</label>
-        <input type="radio" name="theme" id="light" value="light" @change="changeTheme" v-model="theme">
+        <span>
+          <label for="dark">Dark</label>
+          <input type="radio" name="theme" id="dark" value="dark" @change="changeTheme" checked>
+        </span>
+        
+        <span>
+          <label for="light">Light</label>
+          <input type="radio" name="theme" id="light" value="light" @change="changeTheme">
+        </span>
+        
+        <span>
+          <label for="system">System</label>
+          <input type="radio" name="theme" id="system" value="system" @change="changeTheme">
+        </span>
+        
       </div>
     </header>
 
@@ -63,14 +86,19 @@ const changeTheme = e => document.body.className = e.target.value
 
 .settings{
   display:flex;
+  flex-direction: column;
   gap: 1em;
+}
+
+.settings span{
+  display: flex;
 }
 
 header {
   line-height: 1.5;
   max-height: 100vh;
-  display:flex;
-  justify-content: center;
+  display:grid;
+  grid-template-columns: 130px auto 130px;
 }
 
 .themed{
@@ -114,15 +142,22 @@ nav a:first-of-type {
 
 @media (min-width: 1024px) {
   header {
-    display: flex;
-    place-items: center;
-    justify-content: center;
-    padding-right: calc(var(--section-gap) / 2);
+    grid-template-columns: 300px auto 300px;
   }
 
   .logo {
     margin: 0 2rem 0 0;
   }
+
+  .settings{
+    display:flex;
+    flex-direction: row;
+  }
+
+  .settings span{
+    flex-direction: column;
+  }
+
 
   header .wrapper {
     display: flex;
