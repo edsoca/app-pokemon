@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const petition = axios.create({
-    baseURL: 'https://pokeapi.co/api/v2/pokemon/',
+    baseURL: 'https://pokeapi.co/api/v2/pokemon',
     withCredentials: false,
     headers: {
         Accept: 'application/json',
@@ -10,11 +10,7 @@ const petition = axios.create({
 })
 
 export default {
-    getPokemons() {
-        //Com a paràmetre de get posem l'última part de l'URL
-        return petition.get('?limit=10')
-    },
-    getSinglePokemon(id){
+    getPokemon(id){
         return petition.get(`/${id}`)
     }
 }

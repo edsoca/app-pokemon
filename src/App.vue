@@ -19,18 +19,15 @@ const changeTheme = e => document.body.className = e.target.value
 
         <nav>
           <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-          <RouterLink to="/for">For</RouterLink>
-          <RouterLink to="/component">Component</RouterLink>
-          <RouterLink to="/api">API</RouterLink>
+          <RouterLink to="/combat">Combat</RouterLink>
         </nav>
       </div>
 
       <div class="settings">
         <label for="dark">Dark</label>
-        <input type="radio" name="theme" id="dark" @change="changeTheme" v-model="theme" checked>
+        <input type="radio" name="theme" id="dark" value="dark" @change="changeTheme" v-model="theme" checked>
         <label for="light">Light</label>
-        <input type="radio" name="theme" id="light" @change="changeTheme" v-model="theme">
+        <input type="radio" name="theme" id="light" value="light" @change="changeTheme" v-model="theme">
       </div>
     </header>
 
@@ -69,11 +66,14 @@ const changeTheme = e => document.body.className = e.target.value
 header {
   line-height: 1.5;
   max-height: 100vh;
+  display:flex;
+  align-items: center;
 }
 
 .themed{
   background-color: var(--bg-color);
   color: var(--text-color);
+  width: 100%;
 }
 
 .logo {

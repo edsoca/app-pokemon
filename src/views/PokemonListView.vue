@@ -5,6 +5,9 @@
   import petition from '../services/APIservice'
   import { computed } from '@vue/reactivity';
 
+  //Definim la variable per als blocs condicionals
+  const complete = false;
+
   //Sempre que tenim una variable amb ref, per canviar o llegir s'ha de posar variable.value
   const pokemons = ref([])
   //Variable assignada a la caixa de text amb v-model
@@ -13,7 +16,12 @@
   
   //Fem la petició quan tota la vista està carregada
   onMounted(() => {
-    petition.getPokemons().then( response => pokemons.value = response.results)
+    for(let i=1; i<=10; i++){
+      petition.getPokemon(i).then( response => {
+        pokemons.value.push(response.data)
+      })
+    }
+    
   })
   
   //Computed és una variable que va canviant
@@ -29,12 +37,12 @@
 
 <template>
   <div class="for">
-    <h1>API exemple</h1>
+    <h1>List of Pokemons</h1>
     <!-- a dintre de v-model podem posar el nom d'una variable que s'anirà actualitzant a mesura que s'ompli la caixa de text -->
     <input v-model="search" type="text" placeholder="Type to search...">
     <br/>
     <section class="cards">
-      <PhotoCard v-for="pokemon in filteredPokemons" :key="pokemon.url.split('/')[7]" :photoInfo="pokemon"/>
+      <PokemonCard v-for="pokemon in filteredPokemons" :key="pokemon.id" :cardInfo="pokemon" :complete="false"/>
     </section>
     
   </div>

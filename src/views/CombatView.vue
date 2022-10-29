@@ -1,25 +1,31 @@
 
 <script setup>
-  import PhotoCard from '../components/PhotoCard.vue'
+  import PokemonCard from '../components/PokemonCard.vue'
   import {onMounted, ref} from 'vue'
   import petition from '../services/APIservice'
   import { computed } from '@vue/reactivity';
 
   //Sempre que tenim una variable amb ref, per canviar o llegir s'ha de posar variable.value
-  const photos = ref([])
+  const pokemons = ref([])
   //Variable assignada a la caixa de text amb v-model
   const search = ref("")
+
   
   //Fem la petició quan tota la vista està carregada
   onMounted(() => {
-    petition.getPhotos().then( response => photos.value = response.data)
+    for(let i=1; i<=10; i++){
+      petition.getSinglePokemon(i).then( response => {
+        pokemons.value.push(response.data)
+      })
+    }
+    
   })
   
   //Computed és una variable que va canviant
-  const filteredPhotos = computed(
+  const filteredPokemons = computed(
     () => {
-      return photos.value.filter( (itemPhoto) => {
-        return itemPhoto.title.toLowerCase().includes( search.value.toLowerCase() )
+      return pokemons.value.filter( (itemPokemon) => {
+        return itemPokemon.name.toLowerCase().includes( search.value.toLowerCase() )
       })
     }
   )
@@ -33,7 +39,7 @@
     <input v-model="search" type="text" placeholder="Type to search...">
     <br/>
     <section class="cards">
-      <PhotoCard v-for="photo in filteredPhotos" :key="photo.id" :photoInfo="photo"/>
+      <PokemonCard v-for="pokemon in filteredPokemons" :key="pokemon.id" :cardInfo="pokemon"/>
     </section>
     
   </div>
